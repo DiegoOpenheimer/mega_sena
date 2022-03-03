@@ -1,0 +1,7 @@
+{"version":1,"sembast":1}
+{"key":3,"store":"Game","value":{"gameNumber":"primeiro","numbers":"47 - 22 - 42 - 15 - 57 - 7","createdAt":1617383480094284}}
+{"key":7,"store":"Game","value":{"gameNumber":"","numbers":"36 - 48 - 59 - 39 - 37 - 18","createdAt":1617386175154317}}
+{"key":8,"store":"Game","value":{"gameNumber":"123","numbers":"15 - 35 - 40 - 50 - 51 - 14","createdAt":1617386817844962}}
+{"key":9,"store":"Game","value":{"gameNumber":"","numbers":"38 - 21 - 47 - 26 - 34 - 1 - 53 - 52 - 13 - 9","createdAt":1617387304718301}}
+{"key":10,"store":"Game","value":{"gameNumber":"","numbers":"38 - 21 - 47 - 26 - 34 - 1 - 53 - 52 - 13 - 9","createdAt":1617387341270034}}
+{"key":9,"deleted":true,"store":"Game"}
