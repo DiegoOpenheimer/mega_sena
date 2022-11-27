@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:mega_sena/home/DataHelper.dart';
 import 'package:mega_sena/home/GameViewModel.dart';
 import 'package:mega_sena/shared/Utils.dart';
+import 'package:mega_sena/shared/extension/extensions.dart';
 
 class ContainerInputNumbers extends StatefulWidget {
   final GameViewModel gameViewModel;
@@ -61,16 +61,17 @@ class _ContainerInputNumbersState extends State<ContainerInputNumbers> {
               width: 32,
             ),
             FloatingActionButton(
-                onPressed: () {
-                  widget.gameViewModel.generated();
-                  widget.onGenerated?.call();
-                },
-                child: Icon(
-                  Icons.create,
-                  color: Colors.white,
-                ),
-                backgroundColor: Colors.blue,
-                tooltip: 'Gerar jogo'),
+              onPressed: () {
+                widget.gameViewModel.generated();
+                widget.onGenerated?.call();
+              },
+              child: Icon(
+                Icons.create,
+                color: Colors.white,
+              ),
+              backgroundColor: Colors.blue,
+              tooltip: 'Gerar jogo',
+            ),
             SizedBox(
               width: 32,
             ),
@@ -99,16 +100,22 @@ class _ContainerInputNumbersState extends State<ContainerInputNumbers> {
   Widget _buildSlider() {
     return Row(
       children: [
-        Text(widget.gameViewModel.amountValues.value.toString()),
+        Text(
+          widget.gameViewModel.amountValues.value.toString(),
+        ),
         Expanded(
           child: Slider(
             min: GameViewModel.AMOUNT_OF_VALUES_DEFAULT.toDouble(),
             value: widget.gameViewModel.amountValues.value.toDouble(),
             max: GameViewModel.MAX_AMOUNT_OF_VALUES_DEFAULT.toDouble(),
             onChanged: widget.gameViewModel.setAmountValues,
+          ).margin(
+            const EdgeInsets.symmetric(horizontal: 7),
           ),
         ),
-        Text(GameViewModel.MAX_AMOUNT_OF_VALUES_DEFAULT.toString())
+        Text(
+          GameViewModel.MAX_AMOUNT_OF_VALUES_DEFAULT.toString(),
+        ),
       ],
     );
   }

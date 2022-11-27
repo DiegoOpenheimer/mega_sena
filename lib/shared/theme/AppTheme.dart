@@ -24,17 +24,33 @@ class AppTheme {
       );
 
   static light(BuildContext context) => ThemeData(
+        useMaterial3: true,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: GoogleFonts.ptSansTextTheme(),
-        primaryTextTheme: TextTheme(headline6: TextStyle(color: Colors.black)),
+        primaryTextTheme: TextTheme(
+          headline6: TextStyle(color: Colors.black),
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.green))),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.green),
+          ),
+        ),
         appBarTheme: AppBarTheme(
-            iconTheme: IconThemeData(color: Colors.black),
-            color: Theme.of(context).scaffoldBackgroundColor,
-            elevation: 0),
-        colorScheme: ColorScheme.light(secondary: Colors.lightGreen),
-        primarySwatch: Colors.green,
+          iconTheme: IconThemeData(color: Colors.black),
+          color: Theme.of(context).scaffoldBackgroundColor,
+          elevation: 0,
+        ),
+        colorScheme: ColorScheme.light(
+          secondary: Colors.lightGreen,
+          primary: Colors.green,
+        ),
+        primaryColor: Colors.green,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.green[50],
+          showUnselectedLabels: true,
+        ),
+        sliderTheme: SliderThemeData(
+          overlayShape: SliderComponentShape.noOverlay
+        )
       );
 }

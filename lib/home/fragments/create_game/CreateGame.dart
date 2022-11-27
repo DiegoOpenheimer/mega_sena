@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:mega_sena/home/GameViewModel.dart';
+import 'package:mega_sena/shared/extension/extensions.dart';
 import 'package:mega_sena/home/fragments/create_game/components/ContainerGameInput.dart';
 
 class CreateGame extends StatefulWidget {
@@ -27,47 +28,28 @@ class _CreateGameState extends State<CreateGame> {
             ),
             actions: [_buildActions()],
           ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: _buildFields(context),
-          ),
+          _buildFields(context).padding(const EdgeInsets.all(16)),
         ],
       ),
     );
   }
 
   Widget _buildFields(BuildContext context) {
-    return FractionallySizedBox(
-      widthFactor: 1,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Text(
-                  'Se quiser, você pode informar valores para serem inclusos no sorteio',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              Spacer(
-                flex: 1,
-              )
-            ],
-          ),
-          SizedBox(
-            height: 32,
-          ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: ContainerInputNumbers(gameViewModel: widget.gameViewModel),
-          ),
-          SizedBox(
-            height: 16,
-          )
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Se quiser, você pode informar valores para serem inclusos no sorteio',
+          style: TextStyle(fontSize: 18),
+        ),
+        SizedBox(
+          height: 32,
+        ),
+        ContainerInputNumbers(gameViewModel: widget.gameViewModel),
+        SizedBox(
+          height: 16,
+        )
+      ],
     );
   }
 
@@ -87,21 +69,24 @@ class _CreateGameState extends State<CreateGame> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                            icon: Icon(Icons.copy),
-                            onPressed: widget.gameViewModel.copyText),
+                          icon: Icon(Icons.copy),
+                          onPressed: widget.gameViewModel.copyText,
+                        ),
                         SizedBox(
                           width: 16,
                         ),
                         Visibility(
-                            visible: Platform.isAndroid || Platform.isIOS,
-                            child: IconButton(
-                                icon: Icon(Icons.share), onPressed: widget.gameViewModel.shareGame))
+                          visible: Platform.isAndroid || Platform.isIOS,
+                          child: IconButton(
+                              icon: Icon(Icons.share),
+                              onPressed: widget.gameViewModel.shareGame),
+                        )
                       ],
                     ),
                   );
                 });
           }
-          return Container();
+          return SizedBox();
         });
   }
 }

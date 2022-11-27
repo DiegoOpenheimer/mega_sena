@@ -22,6 +22,7 @@ class GameViewModel with GameData {
   ValueNotifier<List<Game>> games = ValueNotifier([]);
   ValueNotifier<List<String>> generatedValues = ValueNotifier([]);
   ValueNotifier<bool> isFilled = ValueNotifier(false);
+  ValueNotifier<int> indexBottomNavigation = ValueNotifier(0);
   PublishSubject<String> message$ = PublishSubject();
   PublishSubject<String> searchField$ = PublishSubject();
   StreamSubscription? _streamSearchText;
@@ -99,7 +100,7 @@ class GameViewModel with GameData {
 
   /// listening events change text field.
   void changeText(String text, DataHelper dataHelper) {
-    dataHelper.typedValue = text != "";
+    dataHelper.typedValue = text != '';
   }
 
   /// generated values and put in TextEditingController
@@ -128,7 +129,7 @@ class GameViewModel with GameData {
   Future<void> save({String? gameNumber}) async {
     try {
       List<String> values = dataHelper
-          .where((element) => element.controller.text != "")
+          .where((element) => element.controller.text != '')
           .map((e) => e.controller.text)
           .toList();
       if (values.length < AMOUNT_OF_VALUES_DEFAULT) {
@@ -136,12 +137,12 @@ class GameViewModel with GameData {
         return;
       }
       Game game =
-          Game(gameNumber: gameNumber ?? '', numbers: values.join(" - "));
+          Game(gameNumber: gameNumber ?? '', numbers: values.join(' - '));
       await gameRepository.save(game);
       addEvent(games: data.games..insert(0, game));
-      message$.add("Jogo registrado com sucesso");
+      message$.add('Jogo registrado com sucesso');
     } catch (e) {
-      message$.add("Falha ao salvar jogo");
+      message$.add('Falha ao salvar jogo');
     }
   }
 
@@ -152,7 +153,7 @@ class GameViewModel with GameData {
       valueToCopy = game.numbers;
     } else {
       List<String> values = dataHelper
-          .where((element) => element.controller.text != "")
+          .where((element) => element.controller.text != '')
           .map((e) => e.controller.text)
           .toList();
       valueToCopy = values.join(' - ');
@@ -164,9 +165,9 @@ class GameViewModel with GameData {
     try {
       String value = _extractValue(game: game);
       await Clipboard.setData(ClipboardData(text: value));
-      message$.add("Valores copiados $value");
+      message$.add('Valores copiados $value');
     } catch (e) {
-      message$.add("Falha ao fazer cópia");
+      message$.add('Falha ao fazer cópia');
     }
   }
 

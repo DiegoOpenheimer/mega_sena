@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:animate_icons/animate_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mega_sena/entities/Game.dart';
 import 'package:mega_sena/home/GameData.dart';
 import 'package:mega_sena/home/GameViewModel.dart';
@@ -142,7 +140,7 @@ class _ListGameState extends State<ListGame>
                   'Não',
                   style: TextStyle(color: Colors.red),
                 ),
-                style: TextButton.styleFrom(primary: Colors.red),
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
               ),
               TextButton(
                   onPressed: () {
@@ -208,13 +206,10 @@ class _ListGameState extends State<ListGame>
               onChanged: widget.gameViewModel.searchField$.add,
               decoration: InputDecoration(hintText: 'Buscar'),
             )
-          : Container(
-              width: double.infinity,
-              child: Text(
-                'Mega Sena',
-                style: Theme.of(context).textTheme.headline5,
-              ),
-            ),
+          : Text(
+            'Mega Sena',
+            style: Theme.of(context).textTheme.headline5,
+          ),
     );
   }
 

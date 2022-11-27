@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:mega_sena/config/ConfigWidget.dart';
 import 'package:mega_sena/home/GameViewModel.dart';
@@ -11,7 +10,6 @@ import 'fragments/create_game/CreateGame.dart';
 import 'fragments/list_games/ListGame.dart';
 
 class HomeWidget extends StatefulWidget {
-
   final PageController? _pageController;
 
   HomeWidget([this._pageController]);
@@ -20,10 +18,11 @@ class HomeWidget extends StatefulWidget {
   _HomeWidgetState createState() => _HomeWidgetState();
 }
 
-class _HomeWidgetState extends State<HomeWidget>
-    with SingleTickerProviderStateMixin {
+class _HomeWidgetState extends State<HomeWidget> with SingleTickerProviderStateMixin {
   late final PageController _pageController = widget._pageController ?? PageController();
-  final GameViewModel _gameViewModel = GameViewModel(gameRepository: GameRepositoryFactory.resolve(TypeGameRepository.SEMBAST));
+  final GameViewModel _gameViewModel = GameViewModel(
+    gameRepository: GameRepositoryFactory.resolve(TypeGameRepository.SEMBAST),
+  );
   late TabController _tabController = TabController(length: 3, vsync: this);
   StreamSubscription? _streamSubscription;
 
@@ -49,7 +48,7 @@ class _HomeWidgetState extends State<HomeWidget>
       content: Text(message),
       action: SnackBarAction(
         onPressed: () {},
-        label: "Fechar",
+        label: 'Fechar',
       ),
     ));
   }
@@ -59,38 +58,40 @@ class _HomeWidgetState extends State<HomeWidget>
     return MegaSenaContainer(
       child: Scaffold(
         body: _body(),
-        bottomNavigationBar: ConvexAppBar(
-          style: TabStyle.flip,
-          controller: _tabController,
-          backgroundColor: Theme.of(context).primaryColor,
-          items: [
-            TabItem(
-              icon: Icon(
-                Icons.games_outlined,
-                color: Colors.white,
-              ),
-              title: 'Jogos',
-            ),
-            TabItem(
-              icon: Icon(
-                Icons.create,
-                color: Colors.white,
-              ),
-              title: 'Registrar',
-            ),
-            TabItem(
-              icon: Icon(
-                Icons.settings,
-                color: Colors.white,
-              ),
-              title: 'Configuração',
-            ),
-          ],
-          onTap: (index) {
-            _pageController.animateToPage(index,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.decelerate);
-          },
+        bottomNavigationBar: ValueListenableBuilder(
+          valueListenable: _gameViewModel.indexBottomNavigation,
+          builder: (context, int index, _) {
+            return BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.games_outlined,
+                  ),
+                  label: 'Jogos',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.create,
+                  ),
+                  label: 'Registrar',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.settings,
+                  ),
+                  label: 'Configuração',
+                )
+              ],
+              currentIndex: index,
+              onTap: (int index) {
+                _pageController.animateToPage(
+                  index,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.decelerate,
+                );
+              },
+            );
+          }
         ),
       ),
     );
@@ -100,6 +101,7 @@ class _HomeWidgetState extends State<HomeWidget>
     return PageView(
       onPageChanged: (int page) {
         _tabController.animateTo(page);
+        _gameViewModel.indexBottomNavigation.value = page;
       },
       controller: _pageController,
       children: [

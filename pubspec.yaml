@@ -23,7 +23,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  convex_bottom_bar: ^3.0.0
   google_fonts: ^3.0.1
   sembast: ^3.0.0+4
   share: ^2.0.1
