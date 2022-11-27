@@ -5,6 +5,9 @@ class DataHelper {
   Key key;
   bool typedValue;
 
-  DataHelper(
-      {required this.controller, required this.typedValue, required this.key});
+  DataHelper({
+    required this.controller,
+    required this.typedValue,
+    required this.key,
+  });
 }

@@ -18,7 +18,7 @@ class ConfigService {
   BehaviorSubject<ThemeMode> currentTheme =
       BehaviorSubject.seeded(ThemeMode.system);
 
-  ThemeMode get currentThemeValue => currentTheme.value!;
+  ThemeMode get currentThemeValue => currentTheme.value;
 
   final List<ThemeMode> items = [
     ThemeMode.system,

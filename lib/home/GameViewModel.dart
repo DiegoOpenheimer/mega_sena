@@ -29,7 +29,12 @@ class GameViewModel with GameData {
   GameViewModel({required this.gameRepository}) {
     for (int i = 0; i < AMOUNT_OF_VALUES_DEFAULT; i++) {
       dataHelper.add(
-          DataHelper(controller: TextEditingController(), typedValue: false, key: Key('input_game_$i')));
+        DataHelper(
+          controller: TextEditingController(),
+          typedValue: false,
+          key: Key('input_game_$i'),
+        ),
+      );
     }
   }
 
@@ -84,8 +89,8 @@ class GameViewModel with GameData {
           DataHelper(
             controller: TextEditingController(),
             typedValue: false,
-            key: Key('input_game_${dataHelper.length + i}')
-          )
+            key: Key('input_game_${dataHelper.length + i}'),
+          ),
         );
       }
     }

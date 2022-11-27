@@ -19,17 +19,23 @@ class GameRepositorySembast implements GameRepository {
 
   @override
   Future<List<Game>> list() async {
-    var records = await store.find(await open, finder: Finder(
-    sortOrders: [SortOrder('createdAt', false)]
-    ));
+    var records = await store.find(
+      await open,
+      finder: Finder(
+        sortOrders: [SortOrder('createdAt', false)],
+      ),
+    );
     return records.map((snapshot) => Game.fromMap(snapshot.value)).toList();
   }
 
   @override
   Future<void> delete(Game game) async {
-    await store.delete(await open,
-        finder: Finder(
-            filter: Filter.equals(
-                'createdAt', game.createdAt.microsecondsSinceEpoch)));
+    await store.delete(
+      await open,
+      finder: Finder(
+        filter:
+            Filter.equals('createdAt', game.createdAt.microsecondsSinceEpoch),
+      ),
+    );
   }
 }
